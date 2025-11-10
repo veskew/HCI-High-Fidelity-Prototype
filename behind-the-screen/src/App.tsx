@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import ChapterOne from './components/ChapterOne'
-import './Story.css'
+import React, { useState, useEffect } from 'react';
+import ChapterOne from './components/ChapterOne';
+import AgeVerification from './components/AgeVerification';
+import './components/AgeVerification.css'
+import './Story.css';
 
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [ageVerified, setAgeVerified] = useState(false);
+
+  useEffect(() => {
+    const isAgeVerified = localStorage.getItem('ageVerified');
+    if (isAgeVerified === 'true') {
+      setAgeVerified(true);
+    }
+  }, []);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -33,19 +43,29 @@ function App() {
     };
   }, []);
 
+  const handleAgeVerification = () => {
+    setAgeVerified(true);
+  };
+
   return (
     <div className="App">
-      {/* Global Fullscreen Toggle Button */}
-      <button 
-        className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
-        onClick={toggleFullscreen}
-        title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-        aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-      />
-      
-      <ChapterOne />
+      {!ageVerified ? (
+        <AgeVerification onVerified={handleAgeVerification} />
+      ) : (
+        <>
+          {/* Global Fullscreen Toggle Button */}
+          <button 
+            className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+          />
+          
+          <ChapterOne />
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
