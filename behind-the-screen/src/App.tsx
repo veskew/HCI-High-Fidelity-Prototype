@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ChapterOne from './components/ChapterOne'
 import ChapterTwo from './components/ChapterTwo'
 import ChapterThree from './components/ChapterThree'
+import ChapterFour from './components/ChapterFour'
 import './Story.css'
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <ChapterOne />
         <ChapterTwo />
         <ChapterThree />
+        <ChapterFour />
       </div>
     </div>
   )
