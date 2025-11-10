@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ChapterOne from './components/ChapterOne'
 import ChapterTwo from './components/ChapterTwo'
+import ChapterThree from './components/ChapterThree'
 import './Story.css'
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
       <div className="story-container">
         <ChapterOne />
         <ChapterTwo />
+        <ChapterThree />
       </div>
     </div>
   )
