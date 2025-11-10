@@ -4,6 +4,7 @@ import ChapterTwo from './components/ChapterTwo'
 import ChapterThree from './components/ChapterThree'
 import ChapterFour from './components/ChapterFour'
 import './Story.css'
+import ChapterFive from './components/ChapterFive'
 
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -51,6 +52,7 @@ function App() {
         <ChapterTwo />
         <ChapterThree />
         <ChapterFour />
+        <ChapterFive />
       </div>
     </div>
   )
