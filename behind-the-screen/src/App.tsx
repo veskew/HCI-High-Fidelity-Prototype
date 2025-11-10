@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ChapterOne from './components/ChapterOne'
+import ChapterTwo from './components/ChapterTwo'
 import './Story.css'
 
 function App() {
@@ -43,7 +44,10 @@ function App() {
         aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
       />
       
-      <ChapterOne />
+      <div className="story-container">
+        <ChapterOne />
+        <ChapterTwo />
+      </div>
     </div>
   )
 }
