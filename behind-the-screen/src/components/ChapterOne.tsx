@@ -3,7 +3,7 @@ import '../Story.css';
 
 const ChapterOne: React.FC = () => {
   return (
-    <div className="story-container">
+    <>
       <h1 className="chapter-title">
         Chapter 1: Companion
       </h1>
@@ -59,9 +59,8 @@ const ChapterOne: React.FC = () => {
                 "Well, it was worth a try..." Joshy muttered as he closed his laptop.
             </div>
         </div>
-
       </div>
-    </div>
+    </>
   );
 };
 
