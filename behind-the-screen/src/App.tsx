@@ -8,6 +8,14 @@ import ChapterFive from './components/ChapterFive'
 
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [ageVerified, setAgeVerified] = useState(false);
+
+  useEffect(() => {
+    const isAgeVerified = localStorage.getItem('ageVerified');
+    if (isAgeVerified === 'true') {
+      setAgeVerified(true);
+    }
+  }, []);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -37,8 +45,27 @@ function App() {
     };
   }, []);
 
+  const handleAgeVerification = () => {
+    setAgeVerified(true);
+  };
+
   return (
     <div className="App">
+      {!ageVerified ? (
+        <AgeVerification onVerified={handleAgeVerification} />
+      ) : (
+        <>
+          {/* Global Fullscreen Toggle Button */}
+          <button 
+            className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+          />
+          
+          <ChapterOne />
+        </>
+      )}
       {/* Global Fullscreen Toggle Button */}
       <button 
         className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
@@ -55,7 +82,7 @@ function App() {
         <ChapterFive />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
