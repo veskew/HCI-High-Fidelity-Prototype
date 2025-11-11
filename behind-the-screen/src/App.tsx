@@ -4,6 +4,8 @@ import ChapterTwo from './components/ChapterTwo'
 import ChapterThree from './components/ChapterThree'
 import ChapterFour from './components/ChapterFour'
 import './Story.css'
+import './components/AgeVerification.css'
+import AgeVerification from './components/AgeVerification'
 import ChapterFive from './components/ChapterFive'
 
 function App() {
@@ -64,23 +66,12 @@ function App() {
           />
           
           <ChapterOne />
+          <ChapterTwo />
+          <ChapterThree />
+          <ChapterFour />
+          <ChapterFive />
         </>
       )}
-      {/* Global Fullscreen Toggle Button */}
-      <button 
-        className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
-        onClick={toggleFullscreen}
-        title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-        aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-      />
-      
-      <div className="story-container">
-        <ChapterOne />
-        <ChapterTwo />
-        <ChapterThree />
-        <ChapterFour />
-        <ChapterFive />
-      </div>
     </div>
   );
 }
