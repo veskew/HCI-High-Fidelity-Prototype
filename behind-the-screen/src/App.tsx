@@ -35,20 +35,6 @@ function App() {
     }
   };
 
-  // const handleScroll = () => {
-  //   let detectedChapter = currentChapter;
-  //   chapterRefs.forEach((ref, index) => {
-  //     if (ref.current) {
-  //       const rect = ref.current.getBoundingClientRect();
-  //       if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-  //         detectedChapter = index + 1;
-  //       }
-  //     }
-  //   });
-  //   if (detectedChapter !== currentChapter) {
-  //     setCurrentChapter(detectedChapter);
-  //   }
-  
   const handleScroll = () => {
     const newChapter = Math.round(window.scrollY / window.innerHeight) + 1;
     setCurrentChapter(newChapter);
@@ -70,7 +56,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Global Fullscreen Toggle Button */}
       <button 
         className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
         onClick={toggleFullscreen}
