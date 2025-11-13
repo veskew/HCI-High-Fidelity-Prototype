@@ -9,6 +9,7 @@ import './Story.css';
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentChapter, setCurrentChapter] = useState(1);
+  const storyContainerRef = useRef<HTMLDivElement | null>(null);
 
   const chapterRefs = [
     useRef<HTMLDivElement | null>(null),
@@ -35,11 +36,7 @@ function App() {
     }
   };
 
-  const handleScroll = () => {
-    const newChapter = Math.round(window.scrollY / window.innerHeight) + 1;
-    setCurrentChapter(newChapter);
-    console.log("Current Chapter:", newChapter);
-  };
+
 
   const scrollToChapter = (index: number) => {
     if (chapterRefs[index].current) {
@@ -48,9 +45,43 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Get the chapter title text to extract chapter number
+            const titleElement = entry.target as HTMLElement;
+            const titleText = titleElement.textContent || '';
+            
+            // Extract chapter number from "Chapter X: Title" format
+            const chapterMatch = titleText.match(/Chapter (\d+):/);
+            if (chapterMatch) {
+              const chapterNumber = parseInt(chapterMatch[1], 10);
+              setCurrentChapter(chapterNumber);
+              console.log("Current Chapter:", chapterNumber, "Title:", titleText);
+            }
+          }
+        });
+      },
+      {
+        root: storyContainerRef.current,
+        rootMargin: '-20% 0px -20% 0px', // Trigger when title is in middle 60% of viewport
+        threshold: 0.5
+      }
+    );
+
+    // Wait for components to render, then observe chapter titles
+    setTimeout(() => {
+      const chapterTitles = document.querySelectorAll('.chapter-title');
+      console.log('Found chapter titles:', chapterTitles.length);
+      
+      chapterTitles.forEach((title) => {
+        observer.observe(title);
+      });
+    }, 100);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
     };
   }, []);
 
@@ -63,7 +94,7 @@ function App() {
         aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
       />
 
-      <div className="story-container">
+      <div className="story-container" ref={storyContainerRef}>
         <div ref={chapterRefs[0]}><ChapterOne /></div>
         <div ref={chapterRefs[1]}><ChapterTwo /></div>
         <div ref={chapterRefs[2]}><ChapterThree /></div>
@@ -77,6 +108,7 @@ function App() {
             key={chapter}
             className={`sidebar-item ${currentChapter === chapter ? 'active' : ''}`}
             onClick={() => scrollToChapter(index)}
+            style={{ background: currentChapter === chapter ? '#fc8181' : '#667eea' }}
           >
             {chapter}
           </div>
