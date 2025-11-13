@@ -3,6 +3,8 @@ import ChapterOne from './components/ChapterOne';
 import ChapterTwo from './components/ChapterTwo';
 import ChapterThree from './components/ChapterThree';
 import ChapterFour from './components/ChapterFour';
+import './components/AgeVerification.css'
+import AgeVerification from './components/AgeVerification'
 import ChapterFive from './components/ChapterFive';
 import './Story.css';
 
@@ -18,6 +20,14 @@ function App() {
     useRef<HTMLDivElement | null>(null),
     useRef<HTMLDivElement | null>(null),
   ];
+  const [ageVerified, setAgeVerified] = useState(false);
+
+  useEffect(() => {
+    const isAgeVerified = localStorage.getItem('ageVerified');
+    if (isAgeVerified === 'true') {
+      setAgeVerified(true);
+    }
+  }, []);
 
   const toggleFullscreen = () => {
     console.log(currentChapter)
@@ -85,21 +95,29 @@ function App() {
     };
   }, []);
 
+  const handleAgeVerification = () => {
+    setAgeVerified(true);
+  };
+
   return (
     <div className="App">
-      <button 
-        className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
-        onClick={toggleFullscreen}
-        title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-        aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-      />
-
-      <div className="story-container" ref={storyContainerRef}>
-        <div ref={chapterRefs[0]}><ChapterOne /></div>
-        <div ref={chapterRefs[1]}><ChapterTwo /></div>
-        <div ref={chapterRefs[2]}><ChapterThree /></div>
-        <div ref={chapterRefs[3]}><ChapterFour /></div>
-        <div ref={chapterRefs[4]}><ChapterFive /></div>
+      {!ageVerified ? (
+        <AgeVerification onVerified={handleAgeVerification} />
+      ) : (
+        <>
+              <button 
+            className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+          />
+    
+          <div className="story-container" ref={storyContainerRef}>
+            <div ref={chapterRefs[0]}><ChapterOne /></div>
+            <div ref={chapterRefs[1]}><ChapterTwo /></div>
+            <div ref={chapterRefs[2]}><ChapterThree /></div>
+            <div ref={chapterRefs[3]}><ChapterFour /></div>
+            <div ref={chapterRefs[4]}><ChapterFive /></div>
       </div>
 
       <div className="sidebar">
@@ -113,7 +131,10 @@ function App() {
             {chapter}
           </div>
         ))}
-      </div>
+          </div>
+          
+        </>
+      )}
     </div>
   );
 }

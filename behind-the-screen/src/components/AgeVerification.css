@@ -1,0 +1,32 @@
+.age-verification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+  }
+  
+  .age-header {
+    font-size: 8em;
+  }
+
+  .age-paragraph {
+    font-size:medium
+  }
+  .date-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .date-inputs input {
+    width: 60px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .error {
+    color: red;
+  }
+  
