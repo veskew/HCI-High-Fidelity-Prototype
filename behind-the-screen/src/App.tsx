@@ -55,6 +55,9 @@ function App() {
   };
 
   useEffect(() => {
+    // Only run intersection observer after age verification is complete
+    if (!ageVerified) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -93,10 +96,12 @@ function App() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [ageVerified]);
 
   const handleAgeVerification = () => {
     setAgeVerified(true);
+    // Reset to chapter 1 when age verification is complete
+    setCurrentChapter(1);
   };
 
   return (
@@ -105,7 +110,7 @@ function App() {
         <AgeVerification onVerified={handleAgeVerification} />
       ) : (
         <>
-              <button 
+          <button 
             className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
             onClick={toggleFullscreen}
             title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
@@ -118,19 +123,19 @@ function App() {
             <div ref={chapterRefs[2]}><ChapterThree /></div>
             <div ref={chapterRefs[3]}><ChapterFour /></div>
             <div ref={chapterRefs[4]}><ChapterFive /></div>
-      </div>
-
-      <div className="sidebar">
-        {[1, 2, 3, 4, 5].map((chapter, index) => (
-          <div
-            key={chapter}
-            className={`sidebar-item ${currentChapter === chapter ? 'active' : ''}`}
-            onClick={() => scrollToChapter(index)}
-            style={{ background: currentChapter === chapter ? '#fc8181' : '#667eea' }}
-          >
-            {chapter}
           </div>
-        ))}
+
+          <div className="sidebar">
+            {[1, 2, 3, 4, 5].map((chapter, index) => (
+              <div
+                key={chapter}
+                className={`sidebar-item ${currentChapter === chapter ? 'active' : ''}`}
+                onClick={() => scrollToChapter(index)}
+                style={{ background: currentChapter === chapter ? '#fc8181' : '#667eea' }}
+              >
+                {chapter}
+              </div>
+            ))}
           </div>
           
         </>
