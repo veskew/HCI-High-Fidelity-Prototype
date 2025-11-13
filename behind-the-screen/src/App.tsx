@@ -1,113 +1,54 @@
-import { useState, useEffect, useRef } from 'react';
+// Components
 import ChapterOne from './components/ChapterOne';
 import ChapterTwo from './components/ChapterTwo';
 import ChapterThree from './components/ChapterThree';
 import ChapterFour from './components/ChapterFour';
-import './components/AgeVerification.css'
-import AgeVerification from './components/AgeVerification'
 import ChapterFive from './components/ChapterFive';
+import AgeVerification from './components/AgeVerification';
+
+// Hooks
+import { 
+  useFullscreen, 
+  useAgeVerification, 
+  useChapterNavigation,
+  useChapterObserver 
+} from './hooks/useStoryHooks';
+
+// Utils
+import { getChapterColor } from './utils/storyUtils';
+
+// Constants
+import { APP_CONFIG } from './constants/appConstants';
+
+// Styles
+import './components/AgeVerification.css';
 import './Story.css';
 
 function App() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [currentChapter, setCurrentChapter] = useState(1);
-  const storyContainerRef = useRef<HTMLDivElement | null>(null);
+  // Custom hooks for separated concerns
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
+  const { ageVerified, handleAgeVerification } = useAgeVerification();
+  const { 
+    currentChapter, 
+    setCurrentChapter, 
+    storyContainerRef, 
+    chapterRefs, 
+    scrollToChapter 
+  } = useChapterNavigation(APP_CONFIG.TOTAL_CHAPTERS);
 
-  const chapterRefs = [
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-  ];
-  const [ageVerified, setAgeVerified] = useState(false);
+  // Set up chapter observation
+  useChapterObserver(ageVerified, storyContainerRef, setCurrentChapter);
 
-  useEffect(() => {
-    const isAgeVerified = localStorage.getItem('ageVerified');
-    if (isAgeVerified === 'true') {
-      setAgeVerified(true);
-    }
-  }, []);
-
-  const toggleFullscreen = () => {
-    console.log(currentChapter)
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => {
-        setIsFullscreen(true);
-      }).catch(err => {
-        console.log('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsFullscreen(false);
-      }).catch(err => {
-        console.log('Error attempting to exit fullscreen:', err);
-      });
-    }
-  };
-
-
-
-  const scrollToChapter = (index: number) => {
-    if (chapterRefs[index].current) {
-      chapterRefs[index].current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    // Only run intersection observer after age verification is complete
-    if (!ageVerified) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Get the chapter title text to extract chapter number
-            const titleElement = entry.target as HTMLElement;
-            const titleText = titleElement.textContent || '';
-            
-            // Extract chapter number from "Chapter X: Title" format
-            const chapterMatch = titleText.match(/Chapter (\d+):/);
-            if (chapterMatch) {
-              const chapterNumber = parseInt(chapterMatch[1], 10);
-              setCurrentChapter(chapterNumber);
-              console.log("Current Chapter:", chapterNumber, "Title:", titleText);
-            }
-          }
-        });
-      },
-      {
-        root: storyContainerRef.current,
-        rootMargin: '-20% 0px -20% 0px', // Trigger when title is in middle 60% of viewport
-        threshold: 0.5
-      }
-    );
-
-    // Wait for components to render, then observe chapter titles
-    setTimeout(() => {
-      const chapterTitles = document.querySelectorAll('.chapter-title');
-      console.log('Found chapter titles:', chapterTitles.length);
-      
-      chapterTitles.forEach((title) => {
-        observer.observe(title);
-      });
-    }, 100);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [ageVerified]);
-
-  const handleAgeVerification = () => {
-    setAgeVerified(true);
-    // Reset to chapter 1 when age verification is complete
-    setCurrentChapter(1);
+  // Handle age verification completion
+  const handleAgeVerificationComplete = () => {
+    handleAgeVerification();
+    setCurrentChapter(1); // Reset to chapter 1
   };
 
   return (
     <div className="App">
       {!ageVerified ? (
-        <AgeVerification onVerified={handleAgeVerification} />
+        <AgeVerification onVerified={handleAgeVerificationComplete} />
       ) : (
         <>
           <button 
@@ -126,16 +67,21 @@ function App() {
           </div>
 
           <div className="sidebar">
-            {[1, 2, 3, 4, 5].map((chapter, index) => (
-              <div
-                key={chapter}
-                className={`sidebar-item ${currentChapter === chapter ? 'active' : ''}`}
-                onClick={() => scrollToChapter(index)}
-                style={{ background: currentChapter === chapter ? '#fc8181' : '#667eea' }}
-              >
-                {chapter}
-              </div>
-            ))}
+            {Array.from({ length: APP_CONFIG.TOTAL_CHAPTERS }, (_, index) => {
+              const chapterNumber = index + 1;
+              const isActive = currentChapter === chapterNumber;
+              
+              return (
+                <div
+                  key={chapterNumber}
+                  className={`sidebar-item ${isActive ? 'active' : ''}`}
+                  onClick={() => scrollToChapter(index)}
+                  style={{ background: getChapterColor(isActive) }}
+                >
+                  {chapterNumber}
+                </div>
+              );
+            })}
           </div>
           
         </>
