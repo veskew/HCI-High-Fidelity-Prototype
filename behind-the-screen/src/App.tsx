@@ -65,11 +65,14 @@ function App() {
             aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
           />
           
-          <ChapterOne />
-          <ChapterTwo />
-          <ChapterThree />
-          <ChapterFour />
-          <ChapterFive />
+          <div className="story-container">
+            <ChapterOne />
+            <ChapterTwo />
+            <ChapterThree />
+            <ChapterFour />
+            <ChapterFive />
+          </div>
+          
         </>
       )}
     </div>
