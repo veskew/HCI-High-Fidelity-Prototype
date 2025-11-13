@@ -3,9 +3,10 @@ import ChapterOne from './components/ChapterOne';
 import ChapterTwo from './components/ChapterTwo';
 import ChapterThree from './components/ChapterThree';
 import ChapterFour from './components/ChapterFour';
-import './components/AgeVerification.css'
-import AgeVerification from './components/AgeVerification'
 import ChapterFive from './components/ChapterFive';
+import AgeVerification from './components/AgeVerification'
+
+import './components/AgeVerification.css'
 import './Story.css';
 
 function App() {
