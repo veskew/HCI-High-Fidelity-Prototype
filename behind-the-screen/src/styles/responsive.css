@@ -1,0 +1,105 @@
+/* Responsive design and mobile styles */
+
+@media (max-width: 768px) {
+  .story-container {
+    padding: 0;
+  }
+  
+  .chapter-title {
+    font-size: 2.5rem;
+    padding: 0 1rem;
+  }
+  
+  .story-section {
+    padding: 1rem;
+  }
+  
+  .story-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .story-section p {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .navigation {
+    padding: 1rem;
+  }
+
+  /* Mobile notification bubbles */
+  .notification-bubble {
+    max-width: calc(100% - 40px);
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .notification-top-left,
+  .notification-bottom-left {
+    left: 20px;
+  }
+  
+  .notification-top-right,
+  .notification-bottom-right {
+    right: 20px;
+  }
+
+  /* Mobile sidebar adjustments */
+  .sidebar {
+    right: 2%;
+    gap: 2rem;
+  }
+
+  .sidebar-item {
+    padding: 8px;
+    font-size: 1rem;
+  }
+
+  /* Mobile fullscreen button */
+  .fullscreen-toggle {
+    bottom: 15px;
+    left: 15px;
+    font-size: 1rem;
+  }
+
+  .fullscreen-toggle::before {
+    content: "⛶";
+    font-size: 1rem;
+  }
+
+  .fullscreen-toggle.in-fullscreen::before {
+    content: "⤓";
+    font-size: 1rem;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .chapter-title {
+    font-size: 3rem;
+  }
+  
+  .story-section {
+    padding: 2rem;
+  }
+  
+  .story-section p {
+    font-size: 1.3rem;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1400px) {
+  .story-section {
+    padding: 6rem;
+  }
+  
+  .story-section p {
+    font-size: 1.6rem;
+    max-width: 80%;
+  }
+  
+  .chapter-title {
+    font-size: 5rem;
+  }
+}
