@@ -5,6 +5,7 @@ import ChapterThree from './components/ChapterThree';
 import ChapterFour from './components/ChapterFour';
 import ChapterFive from './components/ChapterFive';
 import AgeVerification from './components/AgeVerification';
+import ShareButton from './components/ShareButton'
 
 // Hooks
 import { 
@@ -57,7 +58,8 @@ function App() {
             title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
           />
-    
+          <ShareButton />
+
           <div className="story-container" ref={storyContainerRef}>
             <div ref={chapterRefs[0]}><ChapterOne /></div>
             <div ref={chapterRefs[1]}><ChapterTwo /></div>
