@@ -7,6 +7,7 @@ import './Story.css'
 import './components/AgeVerification.css'
 import AgeVerification from './components/AgeVerification'
 import ChapterFive from './components/ChapterFive'
+import ShareButton from './components/ShareButton'
 
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -64,6 +65,7 @@ function App() {
             title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
           />
+          <ShareButton />
           
           <div className="story-container">
             <ChapterOne />
