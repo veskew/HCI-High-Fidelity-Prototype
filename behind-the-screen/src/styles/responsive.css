@@ -70,7 +70,6 @@
   .text-5xl { font-size: 2rem; }
   .text-4xl { font-size: 1.75rem; }
   .text-3xl { font-size: 1.5rem; }
-}
 
   /* Mobile notification bubbles */
   .notification-bubble {
@@ -104,18 +103,20 @@
   .fullscreen-toggle {
     bottom: 15px;
     left: 15px;
+    min-width: 100px;
     font-size: 1rem;
   }
 
   .fullscreen-toggle::before {
-    content: "⛶";
-    font-size: 1rem;
+    content: "fullscreen";
+    font-size: 0.9rem;
   }
 
   .fullscreen-toggle.in-fullscreen::before {
-    content: "⤓";
-    font-size: 1rem;
+    content: "minimize";
+    font-size: 0.9rem;
   }
+}
 
 
 /* Tablet styles */
