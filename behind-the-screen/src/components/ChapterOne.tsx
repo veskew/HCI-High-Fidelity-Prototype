@@ -1,5 +1,8 @@
 import React from 'react';
 import '../Story.css';
+import GridStorySection from './GridStorySection';
+import { createGridCell } from '../utils/storyUtils';
+import { imagePaths } from '../utils/imagePaths';
 
 const ChapterOne: React.FC = () => {
   return (
@@ -38,17 +41,43 @@ const ChapterOne: React.FC = () => {
             replace with chatgpt screen
         </div>
 
-        <div className="story-section">
-          <p>
-            Joshy finished his homework twice as fast as he usually does.
-          </p>
-          <p>
-            "Wow, it explained it so much better than any of my teachers!" he thought to himself.
-          </p>
-          <p>
-            "I wonder if it can help me with other things too?"
-          </p>
-        </div>
+        {/* Replaced the plain story-section with a grid-based story section */}
+        <GridStorySection
+          content={[
+            createGridCell(
+              'top-left',
+              'text',
+              'Joshy finished his homework twice as fast as he usually does.',
+              {
+                fontSize: '3xl',
+                textAlign: 'left',
+                verticalAlign: 'middle',
+              }
+            ),
+            createGridCell(
+              'middle-center',
+              'text',
+              '"Wow, it explained it so much better than any of my teachers!" he thought to himself.',
+              {
+                fontSize: '3xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            ),
+            createGridCell(
+              'bottom-right',
+              'text',
+              '"I wonder if it can help me with other things too?"',
+              {
+                fontSize: '3xl',
+                textAlign: 'left',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+          variant="odd"
+          animationDelay="0.15s"
+        />
 
         <div className='visual-scene scene-workspace'>
             replace with chatgpt screen
