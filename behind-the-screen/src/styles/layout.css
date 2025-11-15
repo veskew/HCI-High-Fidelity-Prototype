@@ -59,6 +59,98 @@
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease forwards;
   margin: 0;
+  position: relative;
+}
+
+/* Grid-based story section for flexible content positioning */
+.story-section-grid {
+  height: 100vh;
+  width: 100vw;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2rem;
+  scroll-snap-align: start;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+  margin: 0;
+  position: relative;
+}
+
+/* Background variants for grid sections */
+.story-section-grid.section-odd {
+  background: var(--bg-gradient-very-light);
+}
+
+.story-section-grid.section-even {
+  background: var(--bg-gradient-reverse);
+}
+
+/* Grid area classes for positioning content */
+.grid-top-left { grid-area: 1 / 1 / 2 / 2; }
+.grid-top-center { grid-area: 1 / 2 / 2 / 3; }
+.grid-top-right { grid-area: 1 / 3 / 2 / 4; }
+.grid-middle-left { grid-area: 2 / 1 / 3 / 2; }
+.grid-middle-center { grid-area: 2 / 2 / 3 / 3; }
+.grid-middle-right { grid-area: 2 / 3 / 3 / 4; }
+.grid-bottom-left { grid-area: 3 / 1 / 4 / 2; }
+.grid-bottom-center { grid-area: 3 / 2 / 4 / 3; }
+.grid-bottom-right { grid-area: 3 / 3 / 4 / 4; }
+
+/* Content containers for grid cells */
+.grid-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.grid-cell.text-left { text-align: left; align-items: flex-start; }
+.grid-cell.text-center { text-align: center; align-items: center; }
+.grid-cell.text-right { text-align: right; align-items: flex-end; }
+
+/* Vertical alignment options */
+.grid-cell.align-top { justify-content: flex-start; }
+.grid-cell.align-middle { justify-content: center; }
+.grid-cell.align-bottom { justify-content: flex-end; }
+
+/* Content type specific styling */
+.grid-cell-text {
+  line-height: 1.6;
+  color: var(--text-primary);
+  /* preserve newlines in multi-paragraph strings passed to grid cells */
+  white-space: pre-wrap;
+}
+
+.grid-cell-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Font size variants */
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+.text-6xl { font-size: 4rem; }
+
+/* Custom font size utility */
+.text-custom {
+  font-size: var(--custom-font-size, 1rem);
 }
 
 .story-section:nth-child(odd) {
