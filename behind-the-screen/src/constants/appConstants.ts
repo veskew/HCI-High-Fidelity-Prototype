@@ -46,3 +46,24 @@ export const CHAPTERS = [
   { id: 4, title: 'Chapter 4: Transformation' },
   { id: 5, title: 'Chapter 5: Resolution' },
 ] as const;
+
+/**
+ * Grid system constants
+ */
+export const GRID_CONFIG = {
+  POSITIONS: [
+    'top-left', 'top-center', 'top-right',
+    'middle-left', 'middle-center', 'middle-right',
+    'bottom-left', 'bottom-center', 'bottom-right'
+  ] as const,
+  
+  FONT_SIZES: [
+    'xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', 'custom'
+  ] as const,
+  
+  TEXT_ALIGNMENTS: ['left', 'center', 'right'] as const,
+  
+  VERTICAL_ALIGNMENTS: ['top', 'middle', 'bottom'] as const,
+  
+  CONTENT_TYPES: ['text', 'image'] as const,
+} as const;
