@@ -31,11 +31,12 @@
   position: fixed;
   bottom: 20px;
   left: 20px;
-  width: auto;
-  height: auto;
+  min-width: 120px;
+  min-height: 40px;
+  padding: 8px 16px;
   background: var(--primary-gradient);
   border: none;
-  border-radius: 20%;
+  border-radius: 20px;
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
@@ -67,7 +68,7 @@
 
 /* Icons for fullscreen states */
 .fullscreen-toggle::before {
-  content: "full screen";
+  content: "maximize";
   font-size: 1.2rem;
 }
 
