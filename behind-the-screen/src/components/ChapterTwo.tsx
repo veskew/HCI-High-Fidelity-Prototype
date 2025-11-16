@@ -1,5 +1,7 @@
 import React from 'react';
 import '../Story.css';
+import GridStorySection from './GridStorySection';
+import { createGridCell } from '../utils/storyUtils';
 
 const ChapterTwo: React.FC = () => {
   return (
@@ -9,30 +11,64 @@ const ChapterTwo: React.FC = () => {
       </h1>
       <div className="chapter-content">
 
-        <div className="story-section">
-            <p>“I had a really awkward interaction
-                with a friend today. I really hope I 
-                didn’t ruin anything.”
-            </p>
-            <p>
-                “Maybe I’ll try talking to the AI about this”
-            </p>
-        </div>
+        <GridStorySection
+          content={[
+            createGridCell(
+              'top-center',
+              'text',
+              "“I had a really awkward interaction with a friend today... I really hope I didn’t ruin anything.”",
+              {
+                fontSize: '4xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            ),
+            createGridCell(
+              'middle-center',
+              'text',
+              "“Maybe I’ll try talking to the AI about this”",
+              {
+                fontSize: '4xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+        />
 
         <div className='visual-scene scene-workspace'>
             replace with chatgpt screen
         </div>
 
-        <div className="story-section">
-            <p>
-                “This doesn’t feel right” Joshy thinks. <br />
-                “Can GPTalk really help me?
-            </p>
-        </div>
+        <GridStorySection
+          content={[
+            createGridCell(
+              'middle-center',
+              'text',
+              "“This doesn’t feel right” Joshy thinks. “Can GPTalk really help me?”",
+              {
+                fontSize: '4xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+        />
 
-        <div className='story-section'>
-            <p>"Well, at least AI cares."</p>
-        </div>
+        <GridStorySection
+          content={[
+            createGridCell(
+              'middle-center',
+              'text',
+              "“Well... at least AI cares.”",
+              {
+                fontSize: '4xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+        />
 
       </div>
     </>
