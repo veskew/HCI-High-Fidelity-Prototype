@@ -1,5 +1,7 @@
 import React from 'react';
 import '../Story.css';
+import GridStorySection from './GridStorySection';
+import { createGridCell } from '../utils/storyUtils';
 
 const ChapterFive: React.FC = () => {
   return (
@@ -14,17 +16,35 @@ const ChapterFive: React.FC = () => {
             replace with Joshy using chatgpt in the dark
         </div>
 
-        <div className="story-section">
-            <p>
-                "I'm using GPTalk too much..." Joshy thought to himself.
-            </p>
-        </div>
-
-        <div className="story-section">
-            <p>
-                "I need help."
-            </p>
-        </div>
+        <GridStorySection
+          content={[
+            createGridCell(
+              'middle-center',
+              'text',
+              '"I\'m using GPTalk too much"',
+              {
+                fontSize: '5xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+        />
+  
+        <GridStorySection
+          content={[
+            createGridCell(
+              'middle-center',
+              'text',
+              '"I need help."',
+              {
+                fontSize: '5xl',
+                textAlign: 'center',
+                verticalAlign: 'middle',
+              }
+            )
+          ]}
+        />
 
         <div className='visual-scene scene-workspace'>
             replace with Joshy's parents coming in
