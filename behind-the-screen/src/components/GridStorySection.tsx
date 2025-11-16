@@ -1,7 +1,7 @@
 // Reusable component for grid-based story sections
 
 import React from 'react';
-import type { GridCellContent } from '../utils/storyUtils';
+import type { GridCellContent, FontFamily } from '../utils/storyUtils';
 import { getGridCellClasses, getGridCellStyles } from '../utils/storyUtils';
 
 interface GridStorySectionProps {
@@ -15,6 +15,10 @@ interface GridStorySectionProps {
   style?: React.CSSProperties;
   /** Animation delay for the section */
   animationDelay?: string;
+  /** Default font family for all text cells in this section */
+  fontFamily?: FontFamily;
+  /** Custom font family string (when fontFamily is 'custom') */
+  customFontFamily?: string;
 }
 
 /**
@@ -26,6 +30,8 @@ export const GridStorySection: React.FC<GridStorySectionProps> = ({
   variant = 'odd',
   style,
   animationDelay,
+  fontFamily,
+  customFontFamily,
 }) => {
   const sectionClasses = [
     'story-section-grid',
@@ -43,7 +49,15 @@ export const GridStorySection: React.FC<GridStorySectionProps> = ({
     <div className={sectionClasses} style={sectionStyle}>
       {content.map((cell, index) => {
         const cellClasses = getGridCellClasses(cell).join(' ');
-        const cellStyles = getGridCellStyles(cell);
+        
+        // Apply section-wide font family if cell doesn't have its own
+        const cellWithSectionFont = {
+          ...cell,
+          fontFamily: cell.fontFamily || fontFamily,
+          customFontFamily: cell.customFontFamily || (fontFamily === 'custom' ? customFontFamily : undefined),
+        };
+        
+        const cellStyles = getGridCellStyles(cellWithSectionFont);
 
         return (
           <div
