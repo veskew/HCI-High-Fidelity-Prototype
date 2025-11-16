@@ -71,12 +71,31 @@ export type VerticalAlignment = 'top' | 'middle' | 'bottom';
 
 export type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | 'custom';
 
+export type FontFamily = 
+  | 'default' 
+  | 'serif' 
+  | 'sans' 
+  | 'mono' 
+  | 'cursive' 
+  | 'fantasy'
+  | 'georgia'
+  | 'times'
+  | 'arial'
+  | 'helvetica'
+  | 'verdana'
+  | 'courier'
+  | 'impact'
+  | 'comic-sans'
+  | 'custom';
+
 export interface GridCellContent {
   position: GridPosition;
   type: ContentType;
   content: string; // Text content or image URL
   fontSize?: FontSize;
   customFontSize?: string; // For custom font sizes (e.g., "1.2rem")
+  fontFamily?: FontFamily;
+  customFontFamily?: string; // For custom font families (e.g., "Georgia, serif")
   textAlign?: TextAlignment;
   verticalAlign?: VerticalAlignment;
   className?: string; // Additional CSS classes
@@ -129,18 +148,74 @@ export const getGridCellClasses = (content: GridCellContent): string[] => {
 };
 
 /**
- * Generates inline styles for custom font sizes
+ * Generates inline styles for custom font sizes and font families
  * @param content - The grid cell content configuration
  * @returns CSS style object or undefined
  */
 export const getGridCellStyles = (content: GridCellContent): React.CSSProperties | undefined => {
+  const styles: React.CSSProperties & { [key: string]: any } = {};
+  
+  // Handle custom font size
   if (content.fontSize === 'custom' && content.customFontSize) {
-    return {
-      '--custom-font-size': content.customFontSize,
-      fontSize: 'var(--custom-font-size)',
-    } as React.CSSProperties;
+    styles['--custom-font-size'] = content.customFontSize;
+    styles.fontSize = 'var(--custom-font-size)';
   }
-  return undefined;
+  
+  // Handle font family
+  if (content.fontFamily) {
+    switch (content.fontFamily) {
+      case 'serif':
+        styles.fontFamily = 'Georgia, "Times New Roman", Times, serif';
+        break;
+      case 'sans':
+        styles.fontFamily = 'Arial, Helvetica, sans-serif';
+        break;
+      case 'mono':
+        styles.fontFamily = '"Courier New", Courier, monospace';
+        break;
+      case 'cursive':
+        styles.fontFamily = '"Brush Script MT", cursive';
+        break;
+      case 'fantasy':
+        styles.fontFamily = 'Impact, Charcoal, sans-serif';
+        break;
+      case 'georgia':
+        styles.fontFamily = 'Georgia, serif';
+        break;
+      case 'times':
+        styles.fontFamily = '"Times New Roman", Times, serif';
+        break;
+      case 'arial':
+        styles.fontFamily = 'Arial, sans-serif';
+        break;
+      case 'helvetica':
+        styles.fontFamily = 'Helvetica, Arial, sans-serif';
+        break;
+      case 'verdana':
+        styles.fontFamily = 'Verdana, Geneva, sans-serif';
+        break;
+      case 'courier':
+        styles.fontFamily = '"Courier New", Courier, monospace';
+        break;
+      case 'impact':
+        styles.fontFamily = 'Impact, Charcoal, sans-serif';
+        break;
+      case 'comic-sans':
+        styles.fontFamily = '"Comic Sans MS", cursive, sans-serif';
+        break;
+      case 'custom':
+        if (content.customFontFamily) {
+          styles.fontFamily = content.customFontFamily;
+        }
+        break;
+      case 'default':
+      default:
+        // Use default font family from CSS
+        break;
+    }
+  }
+  
+  return Object.keys(styles).length > 0 ? styles : undefined;
 };
 
 /**
