@@ -66,9 +66,18 @@ export const GridStorySection: React.FC<GridStorySectionProps> = ({
             style={cellStyles}
           >
             {cell.type === 'text' ? (
-              <div className="grid-cell-text">
-                {cell.content}
-              </div>
+              cell.allowHTML ? (
+                <div 
+                  className="grid-cell-text"
+                  dangerouslySetInnerHTML={{ 
+                    __html: cell.content.replace(/\n/g, '<br />') 
+                  }}
+                />
+              ) : (
+                <div className="grid-cell-text">
+                  {cell.content}
+                </div>
+              )
             ) : (
               <img
                 src={cell.content}
