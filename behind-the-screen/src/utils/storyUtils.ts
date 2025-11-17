@@ -99,6 +99,7 @@ export interface GridCellContent {
   textAlign?: TextAlignment;
   verticalAlign?: VerticalAlignment;
   className?: string; // Additional CSS classes
+  allowHTML?: boolean; // Whether to render content as HTML
 }
 
 /**

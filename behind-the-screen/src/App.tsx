@@ -4,6 +4,7 @@ import ChapterTwo from './components/ChapterTwo';
 import ChapterThree from './components/ChapterThree';
 import ChapterFour from './components/ChapterFour';
 import ChapterFive from './components/ChapterFive';
+import Credits from './components/Credits';
 import AgeVerification from './components/AgeVerification';
 import ShareButton from './components/ShareButton'
 
@@ -66,6 +67,7 @@ function App() {
             <div ref={chapterRefs[2]}><ChapterThree /></div>
             <div ref={chapterRefs[3]}><ChapterFour /></div>
             <div ref={chapterRefs[4]}><ChapterFive /></div>
+            <Credits/>  
           </div>
 
           <div className="sidebar">
