@@ -2,7 +2,6 @@ import React from 'react';
 import '../Story.css';
 import GridStorySection from './GridStorySection';
 import { createGridCell } from '../utils/storyUtils';
-import { imagePaths } from '../utils/imagePaths';
 
 const ChapterOne: React.FC = () => {
   return (
