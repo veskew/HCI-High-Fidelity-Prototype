@@ -1,0 +1,45 @@
+name: Deploy Vite App to GitHub Pages
+
+on:
+  push:
+    branches: [ deploy ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install and Build
+        working-directory: behind-the-screen   # <-- IMPORTANT
+        run: |
+          npm ci
+          npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: behind-the-screen/dist
+
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
