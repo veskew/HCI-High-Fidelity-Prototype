@@ -98,7 +98,8 @@ const ChapterThree: React.FC = () => {
         />
 
         <GridStorySection
-          fontFamily="arial"
+          fontFamily="custom"
+          customFontFamily="Baseball Club Solid"
           content={[
             createGridCell(
               'middle-center',
