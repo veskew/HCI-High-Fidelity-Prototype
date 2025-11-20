@@ -66,13 +66,26 @@ export const useChapterNavigation = (totalChapters: number = 5) => {
   const [currentChapter, setCurrentChapter] = useState(1);
   const storyContainerRef = useRef<HTMLDivElement | null>(null);
   
-  const chapterRefs = Array.from({ length: totalChapters }, () => 
-    useRef<HTMLDivElement | null>(null)
-  );
+  // Use a single useRef to hold an array of elements
+  const chapterElements = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Initialize chapterElements array with nulls if it's empty or needs resizing
+  // This ensures that chapterElements.current has the correct length
+  // and avoids issues if totalChapters changes (though it's usually constant here)
+  if (chapterElements.current.length === 0 || chapterElements.current.length !== totalChapters) {
+    chapterElements.current = Array(totalChapters).fill(null);
+  }
+
+  // Callback ref for chapter divs
+  const getChapterRef = (index: number) => (element: HTMLDivElement | null) => {
+    if (chapterElements.current) {
+      chapterElements.current[index] = element;
+    }
+  };
 
   const scrollToChapter = (index: number) => {
-    if (chapterRefs[index]?.current) {
-      chapterRefs[index].current!.scrollIntoView({ behavior: 'smooth' });
+    if (chapterElements.current[index]) {
+      chapterElements.current[index]!.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -80,7 +93,7 @@ export const useChapterNavigation = (totalChapters: number = 5) => {
     currentChapter,
     setCurrentChapter,
     storyContainerRef,
-    chapterRefs,
+    getChapterRef, // Expose a function to get the ref for each chapter
     scrollToChapter,
   };
 };

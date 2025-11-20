@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // Components
 import ChapterOne from './components/ChapterOne';
 import ChapterTwo from './components/ChapterTwo';
@@ -6,6 +8,7 @@ import ChapterFour from './components/ChapterFour';
 import ChapterFive from './components/ChapterFive';
 import Credits from './components/Credits';
 import AgeVerification from './components/AgeVerification';
+import TriggerWarning from './components/TriggerWarning';
 import ShareButton from './components/ShareButton'
 
 // Hooks
@@ -26,33 +29,54 @@ import { APP_CONFIG } from './constants/appConstants';
 import './components/AgeVerification.css';
 import './Story.css';
 
+type AppScreen = 'ageVerification' | 'triggerWarning' | 'mainContent';
+
 function App() {
+  const { ageVerified, handleAgeVerification } = useAgeVerification();
+  const [currentScreen, setCurrentScreen] = useState<AppScreen>('ageVerification');
+
+  // Initialize screen based on age verification status from localStorage
+  useEffect(() => {
+    if (ageVerified) {
+      setCurrentScreen('triggerWarning'); // If age is verified, proceed to trigger warning
+    }
+  }, [ageVerified]);
+
+
   // Custom hooks for separated concerns
   const { isFullscreen, toggleFullscreen } = useFullscreen();
-  const { ageVerified, handleAgeVerification } = useAgeVerification();
   const { 
     currentChapter, 
     setCurrentChapter, 
     storyContainerRef, 
-    chapterRefs, 
+    getChapterRef, 
     scrollToChapter 
   } = useChapterNavigation(APP_CONFIG.TOTAL_CHAPTERS);
-
+  
   // Set up chapter observation
-  useChapterObserver(ageVerified, storyContainerRef, setCurrentChapter);
+  useChapterObserver(ageVerified && currentScreen === 'mainContent', storyContainerRef, setCurrentChapter);
 
   // Handle age verification completion
   const handleAgeVerificationComplete = () => {
-    handleAgeVerification();
+    console.log('Age verification complete.');
+    handleAgeVerification(); // Sets ageVerified to true and stores in localStorage
+    setCurrentScreen('triggerWarning');
+  };
+
+  const handleTriggerWarningAccept = () => {
+    console.log('Trigger warning accepted. Loading main content.');
+    setCurrentScreen('mainContent');
     setCurrentChapter(1); // Reset to chapter 1
   };
 
-  return (
-    <div className="App">
-      {!ageVerified ? (
-        <AgeVerification onVerified={handleAgeVerificationComplete} />
-      ) : (
-        <>
+  switch (currentScreen) {
+    case 'ageVerification':
+      return <AgeVerification onVerified={handleAgeVerificationComplete} />;
+    case 'triggerWarning':
+      return <TriggerWarning onAccept={handleTriggerWarningAccept} />;
+    case 'mainContent':
+      return (
+        <div className="App">
           <button 
             className={`fullscreen-toggle ${isFullscreen ? 'in-fullscreen' : ''}`}
             onClick={toggleFullscreen}
@@ -62,11 +86,11 @@ function App() {
           <ShareButton />
 
           <div className="story-container" ref={storyContainerRef}>
-            <div ref={chapterRefs[0]}><ChapterOne /></div>
-            <div ref={chapterRefs[1]}><ChapterTwo /></div>
-            <div ref={chapterRefs[2]}><ChapterThree /></div>
-            <div ref={chapterRefs[3]}><ChapterFour /></div>
-            <div ref={chapterRefs[4]}><ChapterFive /></div>
+            <div ref={getChapterRef(0)}><ChapterOne /></div>
+            <div ref={getChapterRef(1)}><ChapterTwo /></div>
+            <div ref={getChapterRef(2)}><ChapterThree /></div>
+            <div ref={getChapterRef(3)}><ChapterFour /></div>
+            <div ref={getChapterRef(4)}><ChapterFive /></div>
             <Credits/>  
           </div>
 
@@ -87,11 +111,11 @@ function App() {
               );
             })}
           </div>
-          
-        </>
-      )}
-    </div>
-  );
+        </div>
+      );
+    default:
+      return null; // Should not happen, but a safeguard
+  }
 }
 
 export default App;
