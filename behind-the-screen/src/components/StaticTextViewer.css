@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Baseball Club Solid';
+  src: url('../assets/VT323-Regular.ttf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.static-text-viewer {
+  position: fixed; /* Keep it on screen regardless of scroll */
+  top: 50%; /* Position it halfway down from the top */
+  transform: translateY(-50%); /* Vertically center it perfectly */
+  left: 12rem; /* Position from the left edge */
+  max-width: 30%; /* Occupy roughly the left third */
+  z-index: 10; /* Ensure it stays on top of other content */
+}
+
+.static-text-viewer p {
+  font-size: 6rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-family: 'Baseball Club Solid', sans-serif; /* Apply the custom font */
+}
