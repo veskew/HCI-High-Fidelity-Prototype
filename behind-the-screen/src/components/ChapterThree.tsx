@@ -2,6 +2,7 @@ import React from 'react';
 import '../Story.css';
 import GridStorySection from './GridStorySection';
 import { createGridCell } from '../utils/storyUtils';
+import imagePaths from '../utils/imagePaths';
 
 const ChapterThree: React.FC = () => {
   return (
@@ -14,17 +15,17 @@ const ChapterThree: React.FC = () => {
         <GridStorySection
           content={[
             createGridCell(
-              'top-left',
+              'top-center',
               'text',
-              '"The talk I had with my friend yesterday keeps bothering me."\n\n"I should talk to him about it."',
+              '\n\n"The talk I had with my friend yesterday keeps bothering me."\n\n"I should talk to him about it."',
               {
                 fontSize: '4xl',
-                textAlign: 'left',
+                textAlign: 'center',
                 verticalAlign: 'middle',
               }
             ),
             createGridCell(
-              'bottom-center',
+              'middle-center',
               'text',
               "No response from his friend.\nHe must be busy right now...",
               {
@@ -36,8 +37,10 @@ const ChapterThree: React.FC = () => {
           ]}
         />
 
-        <div className='visual-scene scene-workspace'>
-            replace with chatgpt screen
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter2('chat-log-1.png')})`,
+          backgroundSize: 'contain'
+        }}>
         </div>
 
         <GridStorySection
@@ -55,27 +58,26 @@ const ChapterThree: React.FC = () => {
           ]}
         />
 
-       <div className='visual-scene scene-workspace'>
-            replace with chatgpt screen
+       <div className='visual-scene' style={{
+        backgroundImage: `url(${imagePaths.chapter3('chat-log-2.png')})`,
+        backgroundSize: 'contain'
+      }}>
         </div>
 
-        <div className='visual-scene scene-workspace'>
-            replace with image
-        </div>
-
-        <div className='visual-scene scene-workspace'>
-            replace with image
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter3('GPTalk-phone.png')})`,
+        }}>
         </div>
 
         <GridStorySection
           content={[
             createGridCell(
-              'middle-left',
+              'middle-center',
               'text',
               "Joshy gets a message from his friend.\n\n'Hey sorry I missed your call yesterday.'\n\n'You free later today?'",
               {
                 fontSize: '4xl',
-                textAlign: 'left',
+                textAlign: 'center',
                 verticalAlign: 'middle',
               }
             )
