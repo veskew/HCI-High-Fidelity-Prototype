@@ -2,8 +2,9 @@
 
 /**
  * Base path for all images in the public directory
+ * Testing with simple path first
  */
-const IMAGE_BASE_PATH = '/images';
+const IMAGE_BASE_PATH = `${import.meta.env.BASE_URL}images`;
 
 /**
  * Helper function to create consistent image paths
