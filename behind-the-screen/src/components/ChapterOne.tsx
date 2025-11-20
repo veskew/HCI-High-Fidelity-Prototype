@@ -37,9 +37,11 @@ const ChapterOne: React.FC = () => {
           </div>
         </div>
 
-        {/* <div className='visual-scene scene-workspace'>
-            replace with chatgpt screen
-        </div> */}
+       <div className="visual-scene" style={{
+         backgroundImage: `url(${imagePaths.chapter1('chat-log-1.png')})`,
+         backgroundSize: 'contain'
+       }}>
+       </div>
 
         {/* Replaced the plain story-section with a grid-based story section */}
         <GridStorySection
@@ -79,11 +81,15 @@ const ChapterOne: React.FC = () => {
           animationDelay="0.15s"
         />
 
-        <div className='visual-scene scene-workspace'>
-            replace with chatgpt screen
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter1('chat-log-2.png')})`,
+          backgroundSize: 'contain'
+        }}>
         </div>
 
-        <div className='visual-scene scene-workspace'>
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter1('laptop-closed.png')})`,
+        }}>
             <div className='notification-bubble notification-bottom-center'>
                 "Well, it was worth a try..." Joshy muttered as he closed his laptop.
             </div>
