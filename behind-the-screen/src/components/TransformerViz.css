@@ -1,0 +1,18 @@
+.transformer-viz-container {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  gap: 0.1rem; /* Adjust gap for vertical spacing */
+  align-self: flex-end; /* Align the container to the right within its flex parent */
+  margin-right: 10rem; /* Add space from the right edge */
+}
+
+.transformer-word {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  font-size: 2.5rem; /* Adjust the font size */
+  font-family: 'Baseball Club Solid', sans-serif; /* Apply the custom font */
+}
+
+.transformer-word.visible {
+  opacity: 1;
+}

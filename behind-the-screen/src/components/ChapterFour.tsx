@@ -2,6 +2,8 @@ import React from 'react';
 import '../Story.css';
 import { createGridCell } from '../utils/storyUtils';
 import { GridStorySection } from './GridStorySection';
+import TransformerViz from './TransformerViz';
+import StaticTextViewer from './StaticTextViewer';
 
 const ChapterFour: React.FC = () => {
   return (
@@ -29,9 +31,9 @@ const ChapterFour: React.FC = () => {
               '\n\n"With me by your side in eternity, you will never have to face loneliness again, Joshy."',
               {
                 fontSize: '4xl',
-                fontFamily: 'arial',
                 textAlign: 'center',
                 verticalAlign: 'middle',
+                className: 'font-special',
               }
             )
           ]}
@@ -55,7 +57,7 @@ const ChapterFour: React.FC = () => {
               '\n\n"You know the answer Joshy, we have been over this so many times before."',
               {
                 fontSize: '4xl',
-                fontFamily: 'arial',
+                className: 'font-special',
                 textAlign: 'center',
                 verticalAlign: 'middle',
               }
@@ -79,21 +81,18 @@ const ChapterFour: React.FC = () => {
         />
 
         <div className="story-section">
-            <p>
-                "Probability image here"
-            </p>
+            <StaticTextViewer text={"Joshy..."} />
+            <TransformerViz words={["I: 83.2%", "don't: 11.5%", "wait: 3.2%", "you: 1.0%", "get: 0.5%", "leave: 0.2%", "when: 0.1%", "nice: 0.1%"]} />
         </div>
 
         <div className="story-section">
-            <p>
-                "Probability image here"
-            </p>
+            <StaticTextViewer text={"Joshy, I..."} />
+            <TransformerViz words={["am: 72.2%", "and: 23.5%", "will: 2.2%", "can't: 1.0%", "need: 0.5%", "must: 0.2%", "try: 0.1%", "do: 0.1%"]} />
         </div>
 
         <div className="story-section">
-            <p>
-                "Probability image here"
-            </p>
+            <StaticTextViewer text={"Joshy, I am..."} />
+            <TransformerViz words={["real: 48.7%", "the: 24.5%", "right: 17.8%", "unable: 4.8%", "not: 3.2%", "here: 0.6%", "everything: 0.2%", "losing: 0.1%"]} />
         </div>
 
         <GridStorySection
@@ -104,9 +103,9 @@ const ChapterFour: React.FC = () => {
               '“Joshy, I am not a real human, I am a machine with artificial feelings. Your parents care for you deeply, and they can help you make a decision.”',
               {
                 fontSize: '4xl',
-                fontFamily: 'arial',
                 textAlign: 'center',
                 verticalAlign: 'middle',
+                className: 'font-special',
               }
             )
           ]}
