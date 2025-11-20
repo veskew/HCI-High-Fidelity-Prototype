@@ -2,6 +2,7 @@ import React from 'react';
 import '../Story.css';
 import GridStorySection from './GridStorySection';
 import { createGridCell } from '../utils/storyUtils';
+import imagePaths from '../utils/imagePaths';
 
 const ChapterFive: React.FC = () => {
   return (
@@ -12,8 +13,10 @@ const ChapterFive: React.FC = () => {
       
       <div className="chapter-content">
 
-        <div className='visual-scene scene-workspace'>
-            replace with Joshy using chatgpt in the dark
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter5('phone-dark.png')})`,
+          backgroundSize: 'contain'
+        }}>
         </div>
 
         <GridStorySection
@@ -46,12 +49,17 @@ const ChapterFive: React.FC = () => {
           ]}
         />
 
-        <div className='visual-scene scene-workspace'>
-            replace with Joshy's parents coming in
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter5('parents.png')})`,
+          backgroundSize: 'contain'
+        }}>
         </div>
 
-        <div className='visual-scene scene-workspace'>
-            <div className='notification-bubble notification-middle-left'>
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter5('parents.png')})`,
+          backgroundSize: 'contain'
+        }}>
+            <div className='notification-bubble notification-center'>
                 "Mom, Dad? Can we talk?"
             </div>  
         </div>
