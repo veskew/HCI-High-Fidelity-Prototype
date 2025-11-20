@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #005276;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
   }
   
   .trigger-warning-content {
-    background-color: #1a1a1a;
+    background-color: #340B30;
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
@@ -34,17 +34,35 @@
   }
   
   .trigger-warning-buttons button {
-    background-color: #333;
-    color: #e0e0e0;
-    border: 1px solid #e0e0e0;
+    background-color: #340B30;
+    color: #DBD4D3;
+    border: 1px solid #DBD4D3;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color .5s, color .5s;
   }
   
-  .trigger-warning-buttons button:hover {
-    background-color: #e0e0e0;
-    color: #1a1a1a;
+  .trigger-warning-button-yes {
+    background-color: #B0DB43; /* Green for acceptance */
+    border-color: #B0DB43;
+    color: white;
+  }
+  
+  .trigger-warning-button-yes:hover {
+    background-color: #B0DB43;
+    border-color: #B0DB43;
+    color: black;
+  }
+  
+  .trigger-warning-button-no {
+    background-color: #6A2738; /* Red for decline */
+    border-color: #6A2738;
+    color: white;
+  }
+  
+  .trigger-warning-button-no:hover {
+    background-color: #6A2738;
+    border-color: #6A2738;
   }
   

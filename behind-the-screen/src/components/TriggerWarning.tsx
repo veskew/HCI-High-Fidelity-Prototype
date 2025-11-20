@@ -30,11 +30,11 @@ const TriggerWarning: React.FC<TriggerWarningProps> = ({ onAccept, onDecline }) 
     <div className="trigger-warning-overlay">
       <div className="trigger-warning-content">
         <h2>Trigger Warning</h2>
-        <p>This story contains themes of social media addiction, mental health struggles, and other sensitive topics that may be disturbing to some readers.</p>
+        <p>Are you comfortable engaging with all of the following topics: references to suicide, depression, loneliness.</p>
         <p>Do you wish to proceed?</p>
         <div className="trigger-warning-buttons">
-          <button onClick={onAccept}>Yes</button>
-          <button onClick={handleDecline}>No</button>
+          <button className="trigger-warning-button-yes" onClick={onAccept}>Yes</button>
+          <button className="trigger-warning-button-no" onClick={handleDecline}>No</button>
         </div>
       </div>
     </div>
