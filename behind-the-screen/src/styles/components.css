@@ -107,3 +107,8 @@
   transform: scale(1.1);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
+
+/* Utility class for applying the special font */
+.font-special {
+  font-family: 'Baseball Club Solid', sans-serif;
+}
