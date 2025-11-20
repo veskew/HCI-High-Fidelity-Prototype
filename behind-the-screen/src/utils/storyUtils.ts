@@ -16,7 +16,7 @@ export const extractChapterNumber = (titleText: string): number | null => {
  * @returns The background color for the chapter
  */
 export const getChapterColor = (isActive: boolean): string => {
-  return isActive ? '#fc8181' : '#667eea';
+  return isActive ? 'var(--button-active)' : 'var(--button-default)';
 };
 
 /**

@@ -3,7 +3,7 @@
 /* Navigation buttons */
 .nav-button {
   padding: 12px 24px;
-  background: var(--primary-gradient);
+  background: var(--button-default);
   color: white;
   border: none;
   border-radius: 25px;
@@ -16,7 +16,7 @@
 
 .nav-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 15px rgba(234, 164, 102, 0.4);
 }
 
 .nav-button:disabled {
@@ -34,7 +34,7 @@
   min-width: 120px;
   min-height: 40px;
   padding: 8px 16px;
-  background: var(--primary-gradient);
+  background: var(--button-default);
   border: none;
   border-radius: 20px;
   color: white;
@@ -58,8 +58,7 @@
 }
 
 .fullscreen-toggle.in-fullscreen {
-  background: var(--secondary-gradient);
-  box-shadow: 0 4px 15px rgba(252, 129, 129, 0.3);
+  background: var(--button-active);
 }
 
 .fullscreen-toggle.in-fullscreen:hover {
@@ -91,7 +90,7 @@
 
 .sidebar-item {
   padding: 10px;
-  background: var(--primary-gradient);
+  background: var(--button-default);
   color: white;
   border-radius: 50%;
   text-align: center;
@@ -101,7 +100,7 @@
 }
 
 .sidebar-item.active {
-  background: var(--secondary-gradient);
+  background: var(--button-active);
 }
 
 .sidebar-item:hover {

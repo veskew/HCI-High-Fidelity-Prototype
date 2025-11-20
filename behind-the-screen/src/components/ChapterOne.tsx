@@ -2,6 +2,7 @@ import React from 'react';
 import '../Story.css';
 import GridStorySection from './GridStorySection';
 import { createGridCell } from '../utils/storyUtils';
+import { imagePaths } from '../utils/imagePaths';
 
 const ChapterOne: React.FC = () => {
   return (
@@ -13,13 +14,13 @@ const ChapterOne: React.FC = () => {
       <div className="chapter-content">
 
         {/* Visual Scene Example with Multiple Notifications */}
-        <div className="visual-scene scene-workspace">
+        <div className="visual-scene" style={{backgroundImage: `url(${imagePaths.chapter1('pov-front.png')})`}}>
           <div className="notification-bubble notification-top-center">
             It's a Saturday afternoon and Joshy is sitting down starting his homework.
           </div>
         </div>
 
-        <div className="visual-scene scene-workspace">
+        <div className="visual-scene" style={{backgroundImage: `url(${imagePaths.chapter1('pov-back-right.png')})`}}>
           <div className="notification-bubble notification-top-left">
             "Man, I have so much work to<br />
             do this weekend. I had no<br />
@@ -32,24 +33,24 @@ const ChapterOne: React.FC = () => {
             giving homework help.
           </div>
           <div className="notification-bubble notification-bottom-right">
-            “I guess I’ll give it a try.”
+            "I guess I'll give it a try."
           </div>
         </div>
 
-        <div className='visual-scene scene-workspace'>
+        {/* <div className='visual-scene scene-workspace'>
             replace with chatgpt screen
-        </div>
+        </div> */}
 
         {/* Replaced the plain story-section with a grid-based story section */}
         <GridStorySection
           content={[
             createGridCell(
-              'top-left',
+              'top-center',
               'text',
               'Joshy finished his homework twice as fast as he usually does.',
               {
                 fontSize: '3xl',
-                textAlign: 'left',
+                textAlign: 'center',
                 verticalAlign: 'middle',
               }
             ),
@@ -64,12 +65,12 @@ const ChapterOne: React.FC = () => {
               }
             ),
             createGridCell(
-              'bottom-right',
+              'bottom-center',
               'text',
               '"I wonder if it can help me with other things too?"',
               {
                 fontSize: '3xl',
-                textAlign: 'left',
+                textAlign: 'center',
                 verticalAlign: 'middle',
               }
             )
