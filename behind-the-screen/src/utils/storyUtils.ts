@@ -34,7 +34,7 @@ export const isValidChapterNumber = (chapterNumber: number, totalChapters: numbe
  * @param error - The error object
  * @param operation - The operation that failed (enter/exit)
  */
-export const handleFullscreenError = (error: any, operation: 'enter' | 'exit'): void => {
+export const handleFullscreenError = (error: unknown, operation: 'enter' | 'exit'): void => {
   console.log(`Error attempting to ${operation} fullscreen:`, error);
   // Could be extended to show user-friendly error messages
 };
@@ -45,7 +45,7 @@ export const handleFullscreenError = (error: any, operation: 'enter' | 'exit'): 
  * @param wait - The number of milliseconds to delay
  * @returns The debounced function
  */
-export const debounce = <T extends (...args: any[]) => void>(
+export const debounce = <T extends (...args: unknown[]) => void>(
   func: T,
   wait: number
 ): ((...args: Parameters<T>) => void) => {
@@ -111,6 +111,11 @@ export const getGridPositionClass = (position: GridPosition): string => {
   return `grid-${position.replace('-', '-')}`;
 };
 
+// Define a type that allows for CSS custom properties
+type CustomCSSProperties = React.CSSProperties & {
+  [key: `--${string}`]: string | undefined;
+};
+
 /**
  * Generates CSS classes for a grid cell
  * @param content - The grid cell content configuration
@@ -154,7 +159,7 @@ export const getGridCellClasses = (content: GridCellContent): string[] => {
  * @returns CSS style object or undefined
  */
 export const getGridCellStyles = (content: GridCellContent): React.CSSProperties | undefined => {
-  const styles: React.CSSProperties & { [key: string]: any } = {};
+  const styles: CustomCSSProperties = {};
   
   // Handle custom font size
   if (content.fontSize === 'custom' && content.customFontSize) {
