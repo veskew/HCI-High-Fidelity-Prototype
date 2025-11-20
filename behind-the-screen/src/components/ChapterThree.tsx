@@ -24,6 +24,10 @@ const ChapterThree: React.FC = () => {
                 verticalAlign: 'middle',
               }
             ),
+          ]}
+        />
+        <GridStorySection
+          content={[
             createGridCell(
               'middle-center',
               'text',
@@ -36,7 +40,6 @@ const ChapterThree: React.FC = () => {
             )
           ]}
         />
-
         <div className='visual-scene' style={{
           backgroundImage: `url(${imagePaths.chapter2('chat-log-1.png')})`,
           backgroundSize: 'contain'
