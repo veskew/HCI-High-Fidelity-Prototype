@@ -45,4 +45,6 @@ body {
   --text-primary: #2c2c2c;
   --text-secondary: #4a5568;
   --text-heading: #2d3748;
+  --button-default:#005276;
+  --button-active: #B0DB43;
 }

@@ -2,7 +2,7 @@
   position: fixed;
   top: 10px;
   right: 10px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--button-default);
   color: white;
   border: none;
   border-radius: 20%;
