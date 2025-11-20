@@ -2,6 +2,7 @@ import React from 'react';
 import '../Story.css';
 import GridStorySection from './GridStorySection';
 import { createGridCell } from '../utils/storyUtils';
+import imagePaths from '../utils/imagePaths';
 
 const ChapterTwo: React.FC = () => {
   return (
@@ -36,8 +37,10 @@ const ChapterTwo: React.FC = () => {
           ]}
         />
 
-        <div className='visual-scene scene-workspace'>
-            replace with chatgpt screen
+        <div className='visual-scene' style={{
+          backgroundImage: `url(${imagePaths.chapter2('chat-log-1.png')})`,
+          backgroundSize: 'contain'
+        }}>
         </div>
 
         <GridStorySection
@@ -57,6 +60,11 @@ const ChapterTwo: React.FC = () => {
 
         <GridStorySection
           content={[
+            createGridCell(
+              'top-center',
+              'image',
+              imagePaths.chapter2('chat-log-2.png')
+            ),
             createGridCell(
               'middle-center',
               'text',
