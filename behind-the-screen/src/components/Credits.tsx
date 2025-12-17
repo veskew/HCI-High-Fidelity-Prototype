@@ -53,6 +53,18 @@ const Credits: React.FC = () => {
               textAlign: 'center',
               verticalAlign: 'middle',
             }
+          ),
+
+          createGridCell(
+            'bottom-center',
+            'text',
+            '<a href="https://sites.google.com/view/behind-the-screen-hci/home" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Project Website</a>',
+            {
+              fontSize: '3xl',
+              textAlign: 'center',
+              verticalAlign: 'middle',
+              allowHTML: true,
+            }
           )
         ]}
       />
